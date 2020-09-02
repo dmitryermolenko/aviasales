@@ -1,0 +1,31 @@
+.sorting-button {
+  width: 250px;
+  box-sizing: border-box;
+  padding: 15px 0;
+  font: inherit;
+  font-size: 12px;
+  line-height: 20px;
+  text-transform: uppercase;
+  border: none;
+  text-align: center;
+  color: #4A4A4A;
+  background-color: #ffffff;
+  border: 1px solid #DFE5EC;
+  cursor: pointer;
+}
+
+.sorting-button--cheep {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.sorting-button--fast {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+
+.sorting-button--active {
+  color: #ffffff;
+  background-color: #2196F3;
+}

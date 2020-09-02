@@ -1,0 +1,35 @@
+.filter {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.filter__title {
+  margin: 0;
+  margin-bottom: 20px;
+  padding: 0;
+  font-size: 12px;
+}
+
+.filter-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.filter-list__item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.filter__checkbox  {
+  width: 20px;
+  height: 20px;
+  margin-right: 20px;
+}
+
+.filter__label {
+  font-size: 13px;
+  line-height: 20px;
+}
