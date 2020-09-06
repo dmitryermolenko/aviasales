@@ -1,16 +1,16 @@
 import React from 'react';
 import SortingButton from '../SortingButton/SortingButton';
+import { SORT_BUTTONS } from '../../utils/constants';
 import classes from './TicketSorting.module.scss';
 
 const TicketSorting = () => {
   return (
     <ul className={classes['sorting-list']}>
-      <li>
-        <SortingButton name="Самый дешевый" isActive id="cheep" />
-      </li>
-      <li>
-        <SortingButton name="Самый быстрый" isActive={false} id="fast" />
-      </li>
+      {SORT_BUTTONS.map(({ text, id }) => (
+        <li key={id}>
+          <SortingButton text={text} id={id} />
+        </li>
+      ))}
     </ul>
   );
 };
