@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setActiveFilter } from '../../actions/actionTypes';
+import { setActiveFilter } from '../../actions/actions';
 import { FILTER_BUTTONS } from '../../utils/constants';
 import classes from './TicketFilter.module.scss';
 
@@ -41,7 +41,7 @@ TicketFilter.defaultProps = {
 
 const mapStateToProps = (state) => {
   return {
-    filters: state.filters,
+    filters: state.activeFilters,
   };
 };
 

@@ -1,42 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Ticket from '../Ticket/Ticket';
+
 import classes from './TicketList.module.scss';
 
-const TicketList = () => {
-  /* const { ticketList } = props;
-  const tickets = ticketList.map(ticket => {
-    return (
-      <li>
-       <article>
-         <header>
-           <p>13 400 P</p>
-           <img src="" alt=""/>
-         </header>
-       </article>
-      </li>
-      
-    )
-  }) */
-
+const TicketList = ({ tickets }) => {
   return (
     <ul className={classes['ticket-list']}>
-      <li className={classes['ticket-list__item']}>
-        <Ticket />
-      </li>
-      <li className={classes['ticket-list__item']}>
-        <Ticket />
-      </li>
-      <li className={classes['ticket-list__item']}>
-        <Ticket />
-      </li>
-      <li className={classes['ticket-list__item']}>
-        <Ticket />
-      </li>
-      <li className={classes['ticket-list__item']}>
-        <Ticket />
-      </li>
+      {tickets.map((ticket) => (
+        <li key={ticket.id} className={classes['ticket-list__item']}>
+          <Ticket ticket={ticket} />
+        </li>
+      ))}
     </ul>
   );
+};
+
+TicketList.defaultProps = {
+  tickets: [],
+};
+
+TicketList.propTypes = {
+  tickets: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default TicketList;

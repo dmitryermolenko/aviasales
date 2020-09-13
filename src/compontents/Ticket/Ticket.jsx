@@ -1,43 +1,104 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classes from './Ticket.module.scss';
 
-const Ticket = () => {
+const Ticket = ({ ticket: { price, carrier, to, from } }) => {
+  const {
+    toOrigin,
+    toDestination,
+    toDepartureTime,
+    toArrivalTime,
+    toDuration,
+    toStops,
+    toStopsCount,
+    toStopsCountLabel,
+  } = to;
+  const {
+    fromOrigin,
+    fromDestination,
+    fromDepartureTime,
+    fromArrivalTime,
+    fromDuration,
+    fromStops,
+    fromStopsCount,
+    fromStopsCountLabel,
+  } = from;
+
   return (
     <article className={classes.ticket}>
       <header className={classes.ticket__header}>
-        <p className={classes.ticket__price}>13 400 P</p>
-        <img src="http://pics.avs.io/99/36/MH.png" alt="" width="" />
+        <p className={classes.ticket__price}>{price} P</p>
+        <img src={`http://pics.avs.io/99/36/${carrier}.png`} alt="" width="" />
       </header>
       <section className={classes.ticket__way}>
-        <div>
-          <h3 className={classes.ticket__subtitle}>MOW - HKT</h3>
-          <p className={classes.ticket__info}>10:45-08:00</p>
+        <div className={classes.ticket_section}>
+          <h3 className={classes.ticket__subtitle}>
+            {toOrigin} - {toDestination}
+          </h3>
+          <p className={classes.ticket__info}>
+            {toDepartureTime} - {toArrivalTime}
+          </p>
         </div>
-        <div>
+        <div className={classes.ticket_section}>
           <h3 className={classes.ticket__subtitle}>В ПУТИ </h3>
-          <p className={classes.ticket__info}>21ч 15м </p>
+          <p className={classes.ticket__info}>{toDuration}</p>
         </div>
-        <div>
-          <h3 className={classes.ticket__subtitle}>2 ПЕРЕСАДКИ</h3>
-          <p className={classes.ticket__info}>HKG,JNB</p>
+        <div className={classes.ticket_section}>
+          <h3 className={classes.ticket__subtitle}>
+            {toStopsCount} {toStopsCountLabel}
+          </h3>
+          <p className={classes.ticket__info}>{toStops}</p>
         </div>
       </section>
       <section className={classes.ticket__way}>
-        <div>
-          <h3 className={classes.ticket__subtitle}>MOW - HKT</h3>
-          <p className={classes.ticket__info}>10:45-08:00</p>
+        <div className={classes.ticket_section}>
+          <h3 className={classes.ticket__subtitle}>
+            {fromOrigin} - {fromDestination}
+          </h3>
+          <p className={classes.ticket__info}>
+            {fromDepartureTime} - {fromArrivalTime}
+          </p>
         </div>
-        <div>
+        <div className={classes.ticket_section}>
           <h3 className={classes.ticket__subtitle}>В ПУТИ </h3>
-          <p className={classes.ticket__info}>21ч 15м </p>
+          <p className={classes.ticket__info}>{fromDuration}</p>
         </div>
-        <div>
-          <h3 className={classes.ticket__subtitle}>2 ПЕРЕСАДКИ</h3>
-          <p className={classes.ticket__info}>HKG,JNB</p>
+        <div className={classes.ticket_section}>
+          <h3 className={classes.ticket__subtitle}>
+            {fromStopsCount} {fromStopsCountLabel}
+          </h3>
+          <p className={classes.ticket__info}>{fromStops}</p>
         </div>
       </section>
     </article>
   );
+};
+
+Ticket.propTypes = {
+  ticket: PropTypes.shape({
+    price: PropTypes.string,
+    carrier: PropTypes.string,
+    to: PropTypes.shape({
+      toOrigin: PropTypes.string,
+      toDestination: PropTypes.string,
+      toDepartureTime: PropTypes.string,
+      toArrivalTime: PropTypes.string,
+      toDuration: PropTypes.string,
+      toStops: PropTypes.string,
+      toStopsCount: PropTypes.number,
+      toStopsCountLabel: PropTypes.string,
+    }),
+    from: PropTypes.shape({
+      fromOrigin: PropTypes.string,
+      fromDestination: PropTypes.string,
+      fromDepartureTime: PropTypes.string,
+      fromArrivalTime: PropTypes.string,
+      fromDuration: PropTypes.string,
+      fromStops: PropTypes.string,
+      fromStopsCount: PropTypes.number,
+      fromStopsCountLabel: PropTypes.string,
+    }),
+  }).isRequired,
 };
 
 export default Ticket;

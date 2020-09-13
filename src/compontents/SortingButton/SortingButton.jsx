@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { setActiveSortingTab } from '../../actions/actionTypes';
+import { setActiveSortingTab } from '../../actions/actions';
 import { Sorting } from '../../utils/constants';
 import classes from './SortingButton.module.scss';
 

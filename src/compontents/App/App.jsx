@@ -1,9 +1,11 @@
 import React from 'react';
 import TicketFilter from '../TicketFilter/TicketFilter';
-import TicketList from '../TicketList/TicketList';
+import TicketListContainer from '../../containers/TicketListContainer/TicketListContainer';
 import TicketSorting from '../TicketSorting/TicketSorting';
 import classes from './App.module.scss';
 import logo from '../../img/logo.svg';
+
+import withTicketsService from '../withTicketsService/withTicketsService';
 
 const App = () => {
   return (
@@ -17,11 +19,11 @@ const App = () => {
         </section>
         <section className={classes.tickets}>
           <TicketSorting />
-          <TicketList />
+          <TicketListContainer />
         </section>
       </main>
     </div>
   );
 };
 
-export default App;
+export default withTicketsService()(App);
