@@ -10,8 +10,7 @@ export default class TicketsService extends React.Component {
 
     const ticketsResponse = await fetch(`https://front-test.beta.aviasales.ru/tickets?searchId=${searchId}`);
 
-    let { tickets } = await ticketsResponse.json();
-    tickets = tickets.slice(0, 100);
+    const { tickets } = await ticketsResponse.json();
 
     return tickets;
   }

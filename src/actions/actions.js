@@ -1,20 +1,11 @@
 import { format, parseISO, addMinutes } from 'date-fns';
+import { formatStopsCountLabel } from '../utils/functions';
 
 export const SET_ACTIVE_SORTING_TAB = 'SET_ACTIVE_SORTING_TAB';
 export const SET_ACTIVE_FILTER = 'SET_ACTIVE_FILTER';
 export const FETCH_TICKETS_SUCCESS = 'FETCH_TICKETS_SUCCESS';
 export const FETCH_TICKETS_REQUEST = 'FETCH_TICKETS_REQUEST';
-
-const formatStopsCountLabel = (stopsCount) => {
-  let label = 'ПЕРЕСАДКИ';
-  if (stopsCount === 1) {
-    label = 'ПЕРЕСАДКА';
-  }
-  if (!stopsCount || stopsCount > 4) {
-    label = 'ПЕРЕСАДОК';
-  }
-  return label;
-};
+export const FILTER_TICKETS = ' FILTER_TICKETS';
 
 export const loadTickets = (newTickets) => {
   return {
@@ -34,6 +25,15 @@ export const setActiveFilter = (filterId) => {
   return {
     type: SET_ACTIVE_FILTER,
     filterId,
+  };
+};
+
+export const filterTickets = (activeFilters, originalTickets, activeSortingTab) => {
+  return {
+    type: FILTER_TICKETS,
+    activeFilters,
+    originalTickets,
+    activeSortingTab,
   };
 };
 
@@ -61,14 +61,14 @@ export const loadTicketsThunk = (service) => (dispatch) => {
       return {
         // eslint-disable-next-line no-plusplus
         id: idx++,
-        price: price.toLocaleString('ru'),
+        price,
         carrier,
         to: {
           toOrigin,
           toDestination,
           toArrivalTime: format(new Date(addMinutes(new Date(toDepartureTime), toDuration)), 'HH:mm'),
           toDepartureTime: format(new Date(parseISO(toDepartureTime)), 'HH:mm'),
-          toDuration: `${Math.floor(toDuration / 60)}ч ${toDuration % 60}м `,
+          toDuration,
           toStops: toStops.join(', '),
           toStopsCount: toStops.length,
           toStopsCountLabel: formatStopsCountLabel(toStops.length),
@@ -78,7 +78,7 @@ export const loadTicketsThunk = (service) => (dispatch) => {
           fromDestination,
           fromArrivalTime: format(new Date(addMinutes(new Date(fromDepartureTime), fromDuration)), 'HH:mm'),
           fromDepartureTime: format(new Date(parseISO(fromDepartureTime)), 'HH:mm'),
-          fromDuration: `${Math.floor(fromDuration / 60)}ч ${fromDuration % 60}м `,
+          fromDuration,
           fromStops: fromStops.join(', '),
           fromStopsCount: fromStops.length,
           fromStopsCountLabel: formatStopsCountLabel(fromStops.length),

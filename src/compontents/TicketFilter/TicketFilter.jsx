@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setActiveFilter } from '../../actions/actions';
+import { setActiveFilter, filterTickets } from '../../actions/actions';
 import { FILTER_BUTTONS } from '../../utils/constants';
 import classes from './TicketFilter.module.scss';
 
-const TicketFilter = ({ filters, setFilter }) => {
+const TicketFilter = ({ activeFilters, tickets, activeSortingTab, setFilter, filter }) => {
+  useEffect(() => {
+    filter(activeFilters, tickets, activeSortingTab);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeFilters, tickets, activeSortingTab]);
+
   return (
     <fieldset className={classes.filter}>
       <legend className={classes.filter__title}>КОЛИЧЕСТВО ПЕРЕСАДОК</legend>
@@ -17,8 +22,8 @@ const TicketFilter = ({ filters, setFilter }) => {
               className={classes.filter__checkbox}
               value={id}
               type="checkbox"
-              checked={filters.some((el) => el === id)}
-              onChange={() => setFilter(id)}
+              checked={activeFilters.some((el) => el === id)}
+              onChange={() => setFilter(id, tickets)}
             />
             <label className={classes.filter__label} htmlFor={id}>
               {text}
@@ -32,22 +37,24 @@ const TicketFilter = ({ filters, setFilter }) => {
 
 TicketFilter.propTypes = {
   setFilter: PropTypes.func.isRequired,
-  filters: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string])),
-};
-
-TicketFilter.defaultProps = {
-  filters: [],
+  activeFilters: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).isRequired,
+  tickets: PropTypes.arrayOf(PropTypes.object).isRequired,
+  activeSortingTab: PropTypes.string.isRequired,
+  filter: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
-    filters: state.activeFilters,
+    activeFilters: state.activeFilters,
+    activeSortingTab: state.activeSortingTab,
+    tickets: state.ticketList.tickets,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setFilter: (id) => dispatch(setActiveFilter(id)),
+    filter: (filters, tickets, sortingTab) => dispatch(filterTickets(filters, tickets, sortingTab)),
   };
 };
 

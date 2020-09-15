@@ -10,23 +10,22 @@ import { loadTicketsThunk } from '../../actions/actions';
 class TicketListContainer extends Component {
   componentDidMount() {
     const { ticketsService, loadTickets } = this.props;
-
     loadTickets(ticketsService);
   }
 
   render() {
-    const { tickets } = this.props;
-    return <TicketList tickets={tickets} />;
+    const { filteredTicketList } = this.props;
+    return <TicketList tickets={filteredTicketList} />;
   }
 }
 
 TicketListContainer.propTypes = {
-  tickets: PropTypes.arrayOf(PropTypes.object).isRequired,
+  filteredTicketList: PropTypes.arrayOf(PropTypes.object).isRequired,
   loadTickets: PropTypes.func.isRequired,
   ticketsService: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.array, PropTypes.object])).isRequired,
 };
 
-const mapStateToProps = ({ ticketList: { tickets } }) => ({ tickets });
+const mapStateToProps = ({ filteredTicketList }) => ({ filteredTicketList });
 const mapDispatchToProps = {
   loadTickets: loadTicketsThunk,
 };

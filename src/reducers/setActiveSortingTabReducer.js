@@ -4,7 +4,7 @@ import * as constants from '../utils/constants';
 const { CHEEP } = constants.Sorting;
 const initialState = CHEEP;
 
-const sortTicketsReducer = (state = initialState, { type, tabId }) => {
+const setActiveSortingTabReducer = (state = initialState, { type, tabId }) => {
   switch (type) {
     case SET_ACTIVE_SORTING_TAB:
       return tabId;
@@ -14,4 +14,4 @@ const sortTicketsReducer = (state = initialState, { type, tabId }) => {
   }
 };
 
-export default sortTicketsReducer;
+export default setActiveSortingTabReducer;

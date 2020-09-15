@@ -9,7 +9,7 @@ const loadTicketsReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_TICKETS_SUCCESS:
       return {
-        tickets: action.tickets,
+        tickets: action.tickets.sort((ticket1, ticket2) => ticket1.price - ticket2.price),
         isLoading: false,
       };
     case FETCH_TICKETS_REQUEST:

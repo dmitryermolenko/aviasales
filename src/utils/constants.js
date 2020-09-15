@@ -1,9 +1,9 @@
 export const Filter = {
   ALL: 'all',
-  NO_TRANSFER: 'no-transfer',
-  ONE_TRANSFER: 'one',
-  TWO_TRANSFERS: 'two',
-  THREE_TRANSFERS: 'three',
+  NO_TRANSFER: 0,
+  ONE_TRANSFER: 1,
+  TWO_TRANSFERS: 2,
+  THREE_TRANSFERS: 3,
 };
 
 export const Sorting = {
@@ -13,10 +13,10 @@ export const Sorting = {
 
 export const FILTER_BUTTONS = [
   { text: 'Все', id: 'all' },
-  { text: 'Без пересадок', id: 'no-transfer' },
-  { text: '1 пересадка', id: 'one' },
-  { text: '2 пересадки', id: 'two' },
-  { text: '3 пересадки', id: 'three' },
+  { text: 'Без пересадок', id: 0 },
+  { text: '1 пересадка', id: 1 },
+  { text: '2 пересадки', id: 2 },
+  { text: '3 пересадки', id: 3 },
 ];
 
 export const SORT_BUTTONS = [

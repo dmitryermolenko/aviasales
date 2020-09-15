@@ -27,7 +27,7 @@ const Ticket = ({ ticket: { price, carrier, to, from } }) => {
   return (
     <article className={classes.ticket}>
       <header className={classes.ticket__header}>
-        <p className={classes.ticket__price}>{price} P</p>
+        <p className={classes.ticket__price}>{price.toLocaleString('ru')} P</p>
         <img src={`http://pics.avs.io/99/36/${carrier}.png`} alt="" width="" />
       </header>
       <section className={classes.ticket__way}>
@@ -41,7 +41,7 @@ const Ticket = ({ ticket: { price, carrier, to, from } }) => {
         </div>
         <div className={classes.ticket_section}>
           <h3 className={classes.ticket__subtitle}>В ПУТИ </h3>
-          <p className={classes.ticket__info}>{toDuration}</p>
+          <p className={classes.ticket__info}>{`${Math.floor(toDuration / 60)}ч ${toDuration % 60}м`}</p>
         </div>
         <div className={classes.ticket_section}>
           <h3 className={classes.ticket__subtitle}>
@@ -61,7 +61,7 @@ const Ticket = ({ ticket: { price, carrier, to, from } }) => {
         </div>
         <div className={classes.ticket_section}>
           <h3 className={classes.ticket__subtitle}>В ПУТИ </h3>
-          <p className={classes.ticket__info}>{fromDuration}</p>
+          <p className={classes.ticket__info}>{`${Math.floor(fromDuration / 60)}ч ${fromDuration % 60}м `}</p>
         </div>
         <div className={classes.ticket_section}>
           <h3 className={classes.ticket__subtitle}>
@@ -76,14 +76,14 @@ const Ticket = ({ ticket: { price, carrier, to, from } }) => {
 
 Ticket.propTypes = {
   ticket: PropTypes.shape({
-    price: PropTypes.string,
+    price: PropTypes.number,
     carrier: PropTypes.string,
     to: PropTypes.shape({
       toOrigin: PropTypes.string,
       toDestination: PropTypes.string,
       toDepartureTime: PropTypes.string,
       toArrivalTime: PropTypes.string,
-      toDuration: PropTypes.string,
+      toDuration: PropTypes.number,
       toStops: PropTypes.string,
       toStopsCount: PropTypes.number,
       toStopsCountLabel: PropTypes.string,
@@ -93,7 +93,7 @@ Ticket.propTypes = {
       fromDestination: PropTypes.string,
       fromDepartureTime: PropTypes.string,
       fromArrivalTime: PropTypes.string,
-      fromDuration: PropTypes.string,
+      fromDuration: PropTypes.number,
       fromStops: PropTypes.string,
       fromStopsCount: PropTypes.number,
       fromStopsCountLabel: PropTypes.string,
