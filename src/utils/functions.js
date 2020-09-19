@@ -9,12 +9,12 @@ export const formatStopsCountLabel = (stopsCount) => {
   return label;
 };
 
-export const sortTickets = (filteredTickets, activeSortingTab) => {
+export const sortTickets = (tickets, activeSortingTab) => {
   if (activeSortingTab === 'cheep') {
-    return filteredTickets.sort((ticket1, ticket2) => ticket1.price - ticket2.price);
+    return tickets.sort((ticket1, ticket2) => ticket1.price - ticket2.price);
   }
 
-  return filteredTickets.sort(
+  return tickets.sort(
     (ticket1, ticket2) =>
       ticket1.to.toDuration + ticket1.from.fromDuration - (ticket2.to.toDuration + ticket2.from.fromDuration)
   );

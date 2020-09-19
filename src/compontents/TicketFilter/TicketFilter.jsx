@@ -9,11 +9,11 @@ const TicketFilter = ({ activeFilters, tickets, activeSortingTab, setFilter, fil
   useEffect(() => {
     filter(activeFilters, tickets, activeSortingTab);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeFilters, tickets, activeSortingTab]);
+  }, [activeFilters, activeSortingTab]);
 
   return (
     <fieldset className={classes.filter}>
-      <legend className={classes.filter__title}>КОЛИЧЕСТВО ПЕРЕСАДОК</legend>
+      <legend className={classes.filter__title}>TRANSFER NUMBER</legend>
       <ul className={classes['filter-list']}>
         {FILTER_BUTTONS.map(({ text, id }) => (
           <li key={id} className={classes['filter-list__item']}>

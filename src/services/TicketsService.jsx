@@ -1,17 +1,17 @@
 import React from 'react';
 
 export default class TicketsService extends React.Component {
-  data = [];
+  id = null;
 
   async getTickets() {
-    const searchIdResponse = await fetch('https://front-test.beta.aviasales.ru/search');
+    if (!this.id) {
+      const searchIdResponse = await fetch('https://front-test.beta.aviasales.ru/search');
+      const { searchId } = await searchIdResponse.json();
+      this.id = searchId;
+    }
 
-    const { searchId } = await searchIdResponse.json();
+    const ticketsResponse = await fetch(`https://front-test.beta.aviasales.ru/tickets?searchId=${this.id}`);
 
-    const ticketsResponse = await fetch(`https://front-test.beta.aviasales.ru/tickets?searchId=${searchId}`);
-
-    const { tickets } = await ticketsResponse.json();
-
-    return tickets;
+    return ticketsResponse.json();
   }
 }
