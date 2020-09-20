@@ -6,6 +6,7 @@ import withTicketsService from '../../compontents/withTicketsService/withTickets
 import TicketList from '../../compontents/TicketList/TicketList';
 
 import { filterTickets, loadTicketsThunk } from '../../actions/actions';
+import { sortTickets } from '../../utils/functions';
 
 const TicketListContainer = (props) => {
   const {
@@ -25,14 +26,14 @@ const TicketListContainer = (props) => {
   }, []);
 
   useEffect(() => {
-    filter(activeFilters, tickets, activeSortingTab);
+    filter(activeFilters, tickets);
     if (!stop) {
       loadTickets(ticketsService);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tickets]);
 
-  const displayedTickets = filteredTicketList.slice(0, 5);
+  const displayedTickets = sortTickets(filteredTicketList, activeSortingTab).slice(0, 5);
 
   return <TicketList tickets={displayedTickets} />;
 };

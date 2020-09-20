@@ -1,16 +1,16 @@
 import { FILTER_TICKETS } from '../actions/actions';
-import { filterTickets, sortTickets } from '../utils/functions';
+import { filterTickets } from '../utils/functions';
 import { FILTERS_LENGTH } from '../utils/constants';
 
 const initialState = [];
 
-const filterTicketsReducer = (state = initialState, { type, activeFilters, originalTickets, activeSortingTab }) => {
+const filterTicketsReducer = (state = initialState, { type, activeFilters, originalTickets }) => {
   switch (type) {
     case FILTER_TICKETS:
       if (activeFilters.length === FILTERS_LENGTH) {
-        return sortTickets(originalTickets, activeSortingTab);
+        return originalTickets;
       }
-      return filterTickets(activeFilters, originalTickets, activeSortingTab);
+      return filterTickets(activeFilters, originalTickets);
 
     default:
       return state;

@@ -29,12 +29,11 @@ export const setActiveFilter = (filterId) => {
   };
 };
 
-export const filterTickets = (activeFilters, originalTickets, activeSortingTab) => {
+export const filterTickets = (activeFilters, originalTickets) => {
   return {
     type: FILTER_TICKETS,
     activeFilters,
     originalTickets,
-    activeSortingTab,
   };
 };
 

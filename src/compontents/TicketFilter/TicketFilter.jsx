@@ -5,11 +5,11 @@ import { setActiveFilter, filterTickets } from '../../actions/actions';
 import { FILTER_BUTTONS } from '../../utils/constants';
 import classes from './TicketFilter.module.scss';
 
-const TicketFilter = ({ activeFilters, tickets, activeSortingTab, setFilter, filter }) => {
+const TicketFilter = ({ activeFilters, tickets, setFilter, filter }) => {
   useEffect(() => {
-    filter(activeFilters, tickets, activeSortingTab);
+    filter(activeFilters, tickets);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeFilters, activeSortingTab]);
+  }, [activeFilters]);
 
   return (
     <fieldset className={classes.filter}>
@@ -39,7 +39,6 @@ TicketFilter.propTypes = {
   setFilter: PropTypes.func.isRequired,
   activeFilters: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).isRequired,
   tickets: PropTypes.arrayOf(PropTypes.object).isRequired,
-  activeSortingTab: PropTypes.string.isRequired,
   filter: PropTypes.func.isRequired,
 };
 
