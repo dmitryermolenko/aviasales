@@ -18,6 +18,7 @@ const TicketListContainer = (props) => {
     activeFilters,
     filteredTicketList,
     filter,
+    ticketsNumberToBeDisplayed,
   } = props;
 
   useEffect(() => {
@@ -33,7 +34,7 @@ const TicketListContainer = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tickets]);
 
-  const displayedTickets = sortTickets(filteredTicketList, activeSortingTab).slice(0, 5);
+  const displayedTickets = sortTickets(filteredTicketList, activeSortingTab).slice(0, ticketsNumberToBeDisplayed);
 
   return <TicketList tickets={displayedTickets} />;
 };
@@ -48,14 +49,22 @@ TicketListContainer.propTypes = {
   activeSortingTab: PropTypes.string.isRequired,
   activeFilters: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])).isRequired,
   filter: PropTypes.func.isRequired,
+  ticketsNumberToBeDisplayed: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = ({ ticketList: { tickets, stop }, filteredTicketList, activeSortingTab, activeFilters }) => ({
+const mapStateToProps = ({
+  ticketList: { tickets, stop },
+  filteredTicketList,
+  activeSortingTab,
+  activeFilters,
+  ticketsNumberToBeDisplayed,
+}) => ({
   tickets,
   stop,
   filteredTicketList,
   activeSortingTab,
   activeFilters,
+  ticketsNumberToBeDisplayed,
 });
 const mapDispatchToProps = {
   loadTickets: loadTicketsThunk,

@@ -5,7 +5,8 @@ export const SET_ACTIVE_SORTING_TAB = 'SET_ACTIVE_SORTING_TAB';
 export const SET_ACTIVE_FILTER = 'SET_ACTIVE_FILTER';
 export const FETCH_TICKETS_SUCCESS = 'FETCH_TICKETS_SUCCESS';
 export const FETCH_TICKETS_REQUEST = 'FETCH_TICKETS_REQUEST';
-export const FILTER_TICKETS = ' FILTER_TICKETS';
+export const FILTER_TICKETS = 'FILTER_TICKETS';
+export const SET_TICKETS_NUMBER_TO_BE_DISPLAYED = 'SET_TICKETS_NUMBER_TO_BE_DISPLAYED';
 
 export const loadTickets = (newTickets, stop) => {
   return {
@@ -34,6 +35,13 @@ export const filterTickets = (activeFilters, originalTickets) => {
     type: FILTER_TICKETS,
     activeFilters,
     originalTickets,
+  };
+};
+
+export const setTicketsNumberToBeDisplayed = (ticketsNumber) => {
+  return {
+    type: SET_TICKETS_NUMBER_TO_BE_DISPLAYED,
+    ticketsNumber,
   };
 };
 

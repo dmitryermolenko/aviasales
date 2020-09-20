@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setActiveFilter, filterTickets } from '../../actions/actions';
-import { FILTER_BUTTONS } from '../../utils/constants';
+import { setActiveFilter, filterTickets, setTicketsNumberToBeDisplayed } from '../../actions/actions';
+import { FILTER_BUTTONS, TICKETS_NUMBER_TO_BE_DISPLAYED } from '../../utils/constants';
 import classes from './TicketFilter.module.scss';
 
-const TicketFilter = ({ activeFilters, tickets, setFilter, filter }) => {
+const TicketFilter = ({ activeFilters, tickets, setFilter, filter, setTicketsNumber }) => {
   useEffect(() => {
     filter(activeFilters, tickets);
+    setTicketsNumber(TICKETS_NUMBER_TO_BE_DISPLAYED);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeFilters]);
 
@@ -40,6 +41,7 @@ TicketFilter.propTypes = {
   activeFilters: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).isRequired,
   tickets: PropTypes.arrayOf(PropTypes.object).isRequired,
   filter: PropTypes.func.isRequired,
+  setTicketsNumber: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -50,11 +52,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setFilter: (id) => dispatch(setActiveFilter(id)),
-    filter: (filters, tickets, sortingTab) => dispatch(filterTickets(filters, tickets, sortingTab)),
-  };
+const mapDispatchToProps = {
+  setFilter: setActiveFilter,
+  filter: filterTickets,
+  setTicketsNumber: setTicketsNumberToBeDisplayed,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TicketFilter);

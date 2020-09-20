@@ -33,3 +33,4 @@ export const FILTERS = [
 ];
 
 export const FILTERS_LENGTH = 5;
+export const TICKETS_NUMBER_TO_BE_DISPLAYED = 5;

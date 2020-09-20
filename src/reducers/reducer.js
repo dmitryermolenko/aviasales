@@ -3,12 +3,14 @@ import loadTicketsReducer from './loadTicketsReducer';
 import setActiveFiltersReducer from './setActiveFiltersReducer';
 import setActiveSortingTabReducer from './setActiveSortingTabReducer';
 import filterTicketsReducer from './filterTicketsReducer';
+import setTicketsNumberToBeDisplayedReducer from './setTicketsNumberToBeDisplayedReducer';
 
 const rootReducer = combineReducers({
   ticketList: loadTicketsReducer,
   activeFilters: setActiveFiltersReducer,
   activeSortingTab: setActiveSortingTabReducer,
   filteredTicketList: filterTicketsReducer,
+  ticketsNumberToBeDisplayed: setTicketsNumberToBeDisplayedReducer,
 });
 
 export default rootReducer;
