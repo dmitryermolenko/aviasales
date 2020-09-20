@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import './index.scss';
+import 'antd/dist/antd.css';
 import App from './compontents/App/App';
 import TicketsService from './services/TicketsService';
 import { TicketsServiceProvider } from './compontents/TicketsServiceContext/TicketsServiceContext';

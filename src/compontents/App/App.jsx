@@ -2,6 +2,7 @@ import React from 'react';
 import TicketFilter from '../TicketFilter/TicketFilter';
 import TicketListContainer from '../../containers/TicketListContainer/TicketListContainer';
 import TicketSorting from '../TicketSorting/TicketSorting';
+import ShowmoreButtonContainer from '../../containers/ShowmoreButtonContainer/ShowmoreButtonContainer';
 import classes from './App.module.scss';
 import logo from '../../img/logo.svg';
 
@@ -20,6 +21,7 @@ const App = () => {
         <section className={classes.tickets}>
           <TicketSorting />
           <TicketListContainer />
+          <ShowmoreButtonContainer />
         </section>
       </main>
     </div>
