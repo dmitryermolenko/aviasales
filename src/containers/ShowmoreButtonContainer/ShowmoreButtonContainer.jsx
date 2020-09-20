@@ -6,25 +6,33 @@ import classes from './ShowmoreButtonContainer.module.scss';
 import { setTicketsNumberToBeDisplayed } from '../../actions/actions';
 import { TICKETS_NUMBER_TO_BE_DISPLAYED } from '../../utils/constants';
 
-const ShowmoreButtonContainer = ({ ticketsNumberToBeDisplayed, setTicketsNumber }) => {
-  return (
-    <Button
-      className={classes['show-more']}
-      type="primary"
-      block
-      onClick={() => setTicketsNumber(ticketsNumberToBeDisplayed + TICKETS_NUMBER_TO_BE_DISPLAYED)}
-    >
-      Показать еще 5 билетов
-    </Button>
-  );
+const ShowmoreButtonContainer = ({ ticketsNumberToBeDisplayed, setTicketsNumber, filteredTicketList }) => {
+  if (filteredTicketList.length) {
+    return (
+      <Button
+        className={classes['show-more']}
+        type="primary"
+        block
+        onClick={() => setTicketsNumber(ticketsNumberToBeDisplayed + TICKETS_NUMBER_TO_BE_DISPLAYED)}
+      >
+        Показать еще 5 билетов
+      </Button>
+    );
+  }
+
+  return null;
 };
 
 ShowmoreButtonContainer.propTypes = {
   ticketsNumberToBeDisplayed: PropTypes.number.isRequired,
   setTicketsNumber: PropTypes.func.isRequired,
+  filteredTicketList: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-const mapStateToProps = ({ ticketsNumberToBeDisplayed }) => ({ ticketsNumberToBeDisplayed });
+const mapStateToProps = ({ ticketsNumberToBeDisplayed, filteredTicketList }) => ({
+  ticketsNumberToBeDisplayed,
+  filteredTicketList,
+});
 const mapDispatchToProps = {
   setTicketsNumber: setTicketsNumberToBeDisplayed,
 };

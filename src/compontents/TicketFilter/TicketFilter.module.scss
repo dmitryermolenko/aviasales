@@ -2,6 +2,13 @@
   margin: 0;
   padding: 0;
   border: none;
+
+  width: 100%;
+  background-color:#FFFFFF;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 20px 20px 0 20px;
 }
 
 .filter__title {
@@ -9,18 +16,22 @@
   margin-bottom: 20px;
   padding: 0;
   font-size: 12px;
+  color: #4A4A4A;
+  font-weight: bold;
 }
 
 .filter-list {
   margin: 0;
   padding: 0;
   list-style: none;
+ 
+ 
 }
 
 .filter-list__item {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .filter__checkbox  {

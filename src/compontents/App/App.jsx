@@ -1,5 +1,6 @@
 import React from 'react';
-import TicketFilter from '../TicketFilter/TicketFilter';
+import { connect } from 'react-redux';
+import TicketFilterContainer from '../../containers/TicketFilterContainer/TicketFilterContainer';
 import TicketListContainer from '../../containers/TicketListContainer/TicketListContainer';
 import TicketSorting from '../TicketSorting/TicketSorting';
 import ShowmoreButtonContainer from '../../containers/ShowmoreButtonContainer/ShowmoreButtonContainer';
@@ -16,7 +17,7 @@ const App = () => {
       </header>
       <main className={classes['app-main']}>
         <section className={classes.filters}>
-          <TicketFilter />
+          <TicketFilterContainer />
         </section>
         <section className={classes.tickets}>
           <TicketSorting />
@@ -28,4 +29,5 @@ const App = () => {
   );
 };
 
-export default withTicketsService()(App);
+const mapStateToProps = ({ ticketList: { tickets } }) => ({ tickets });
+export default withTicketsService()(connect(mapStateToProps)(App));
