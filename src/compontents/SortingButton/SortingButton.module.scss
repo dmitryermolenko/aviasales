@@ -1,5 +1,5 @@
 .sorting-button {
-  width: 250px;
+  width: 150px;
   box-sizing: border-box;
   padding: 15px 0;
   font: inherit;
@@ -28,4 +28,11 @@
 .sorting-button--active {
   color: #ffffff;
   background-color: #2196F3;
+}
+
+@media (min-width: 768px) {
+  .sorting-button {
+    width: 250px;
+  }
+  
 }
