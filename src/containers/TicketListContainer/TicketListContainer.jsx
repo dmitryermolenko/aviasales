@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Progress } from 'antd';
+import { Progress, Alert } from 'antd';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { TICKETS_NUMBER_PER_PERCENT } from '../../utils/constants';
@@ -46,10 +46,27 @@ const TicketListContainer = (props) => {
 
   const displayedTickets = sortTickets(filteredTicketList, activeSortingTab).slice(0, ticketsNumberToBeDisplayed);
 
+  // данные загружаются и ни один из фильтров не выбран
+  if (!isLoadingFinished && !activeFilters.length) {
+    return (
+      <>
+        <Progress percent={loadingPercent} showInfo={false} strokeColor={{ from: '#108ee9', to: '#87d068' }} />
+        <Alert description="Рейсов, подходящих под заданные фильтры, не найдено" type="info" />
+      </>
+    );
+  }
+
+  // данные загружены и ни один из фильтров не выбран
+  if (!activeFilters.length) {
+    return <Alert description="Рейсов, подходящих под заданные фильтры, не найдено" type="info" />;
+  }
+
+  // данные загружаются и все фильтры выбраны
   if (isLoadingFinished) {
     return <TicketList tickets={displayedTickets} />;
   }
 
+  // данные загружены и все фильтры выбраны
   return (
     <>
       <Progress percent={loadingPercent} showInfo={false} strokeColor={{ from: '#108ee9', to: '#87d068' }} />
