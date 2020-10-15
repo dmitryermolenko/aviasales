@@ -1,6 +1,6 @@
 import React from 'react';
 import SortingButton from '../SortingButton/SortingButton';
-import { SORT_BUTTONS } from '../../utils/constants';
+import SORT_BUTTONS from './helpers';
 import classes from './TicketSorting.module.scss';
 
 const TicketSorting = () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FILTER_BUTTONS } from '../../utils/constants';
+import FILTER_BUTTONS from './helpers';
 import classes from './TicketFilter.module.scss';
 
 const TicketFilter = ({ activeFilters, setFilter }) => {

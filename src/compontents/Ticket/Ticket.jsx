@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import formatTime from './helpers';
 import classes from './Ticket.module.scss';
 
 const Ticket = ({ ticket: { price, carrier, to, from } }) => {
@@ -41,7 +42,7 @@ const Ticket = ({ ticket: { price, carrier, to, from } }) => {
         </div>
         <div className={classes.ticket_section}>
           <h3 className={classes.ticket__subtitle}>В ПУТИ </h3>
-          <p className={classes.ticket__info}>{`${Math.floor(toDuration / 60)}ч ${toDuration % 60}м`}</p>
+          <p className={classes.ticket__info}>{formatTime(toDuration)}</p>
         </div>
         <div className={classes.ticket_section}>
           <h3 className={classes.ticket__subtitle}>
@@ -61,7 +62,7 @@ const Ticket = ({ ticket: { price, carrier, to, from } }) => {
         </div>
         <div className={classes.ticket_section}>
           <h3 className={classes.ticket__subtitle}>В ПУТИ </h3>
-          <p className={classes.ticket__info}>{`${Math.floor(fromDuration / 60)}ч ${fromDuration % 60}м `}</p>
+          <p className={classes.ticket__info}>{formatTime(fromDuration)}</p>
         </div>
         <div className={classes.ticket_section}>
           <h3 className={classes.ticket__subtitle}>

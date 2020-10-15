@@ -11,19 +11,6 @@ export const Sorting = {
   FAST: 'fast',
 };
 
-export const FILTER_BUTTONS = [
-  { text: 'Все', id: 'all' },
-  { text: 'Без пересадок', id: 0 },
-  { text: '1 пересадка', id: 1 },
-  { text: '2 пересадки', id: 2 },
-  { text: '3 пересадки', id: 3 },
-];
-
-export const SORT_BUTTONS = [
-  { text: 'Самый дешевый', id: 'cheep' },
-  { text: 'Самый быстрый', id: 'fast' },
-];
-
 export const FILTERS = [
   Filter.ALL,
   Filter.NO_TRANSFER,
@@ -34,4 +21,3 @@ export const FILTERS = [
 
 export const FILTERS_LENGTH = 5;
 export const TICKETS_NUMBER_TO_BE_DISPLAYED = 5;
-export const TICKETS_NUMBER_PER_PERCENT = 100;

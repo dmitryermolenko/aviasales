@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Progress, Alert } from 'antd';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { TICKETS_NUMBER_PER_PERCENT } from '../../utils/constants';
+import { sortTickets, TICKETS_NUMBER_PER_PERCENT } from './helpers';
 
 import withTicketsService from '../../compontents/withTicketsService/withTicketsService';
 import TicketList from '../../compontents/TicketList/TicketList';
 
 import { filterTickets, loadTicketsThunk } from '../../actions/actions';
-import { sortTickets } from '../../utils/functions';
 
 const TicketListContainer = (props) => {
   const [isLoadingFinished, setLodingStatus] = useState(false);
