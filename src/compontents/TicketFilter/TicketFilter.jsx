@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FILTER_BUTTONS from './helpers';
+import { FILTER_BUTTONS, checkActiveFilter } from './helpers';
 import classes from './TicketFilter.module.scss';
 
 const TicketFilter = ({ activeFilters, setFilter }) => {
@@ -15,7 +15,7 @@ const TicketFilter = ({ activeFilters, setFilter }) => {
               className={classes.filter__checkbox}
               value={id}
               type="checkbox"
-              checked={activeFilters.some((el) => el === id)}
+              checked={checkActiveFilter(activeFilters, id)}
               onChange={() => setFilter(id)}
             />
             <label className={classes.filter__label} htmlFor={id}>
@@ -33,4 +33,4 @@ TicketFilter.propTypes = {
   activeFilters: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).isRequired,
 };
 
-export default TicketFilter;
+export default React.memo(TicketFilter);

@@ -2,13 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Ticket from '../Ticket/Ticket';
+import { formatData } from './helpers';
 
 import classes from './TicketList.module.scss';
 
 const TicketList = ({ tickets }) => {
+  const formattedData = tickets.map(formatData);
+
   return (
     <ul className={classes['ticket-list']}>
-      {tickets.map((ticket) => (
+      {formattedData.map((ticket) => (
         <li key={ticket.id} className={classes['ticket-list__item']}>
           <Ticket ticket={ticket} />
         </li>

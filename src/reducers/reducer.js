@@ -2,15 +2,13 @@ import { combineReducers } from 'redux';
 import loadTicketsReducer from './loadTicketsReducer';
 import setActiveFiltersReducer from './setActiveFiltersReducer';
 import setActiveSortingTabReducer from './setActiveSortingTabReducer';
-import filterTicketsReducer from './filterTicketsReducer';
-import setTicketsNumberToBeDisplayedReducer from './setTicketsNumberToBeDisplayedReducer';
+import setDisplayedTicketsNumberReducer from './setDisplayedTicketsNumberReducer';
 
 const rootReducer = combineReducers({
   ticketList: loadTicketsReducer,
   activeFilters: setActiveFiltersReducer,
   activeSortingTab: setActiveSortingTabReducer,
-  filteredTicketList: filterTicketsReducer,
-  ticketsNumberToBeDisplayed: setTicketsNumberToBeDisplayedReducer,
+  displayedTicketsNumber: setDisplayedTicketsNumberReducer,
 });
 
 export default rootReducer;

@@ -1,4 +1,4 @@
-const FILTER_BUTTONS = [
+export const FILTER_BUTTONS = [
   { text: 'Все', id: 'all' },
   { text: 'Без пересадок', id: 0 },
   { text: '1 пересадка', id: 1 },
@@ -6,4 +6,6 @@ const FILTER_BUTTONS = [
   { text: '3 пересадки', id: 3 },
 ];
 
-export default FILTER_BUTTONS;
+export const checkActiveFilter = (filters, currentFilterId) => {
+  return filters.some((el) => el === currentFilterId);
+};

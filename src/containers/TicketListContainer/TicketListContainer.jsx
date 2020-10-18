@@ -1,28 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { Progress, Alert } from 'antd';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { sortTickets, TICKETS_NUMBER_PER_PERCENT } from './helpers';
+import { sortTickets, filterTickets, TICKETS_NUMBER_PER_PERCENT } from './helpers';
 
 import withTicketsService from '../../compontents/withTicketsService/withTicketsService';
 import TicketList from '../../compontents/TicketList/TicketList';
 
-import { filterTickets, loadTicketsThunk } from '../../actions/actions';
+import { loadTicketsThunk } from '../../actions/actions';
 
 const TicketListContainer = (props) => {
   const [isLoadingFinished, setLodingStatus] = useState(false);
   const [loadingPercent, setLoadingPercent] = useState(0);
-  const {
-    ticketsService,
-    loadTickets,
-    stop,
-    tickets,
-    activeSortingTab,
-    activeFilters,
-    filteredTicketList,
-    filter,
-    ticketsNumberToBeDisplayed,
-  } = props;
+  const { ticketsService, loadTickets, stop, tickets, activeSortingTab, activeFilters, displayedTicketsNumber } = props;
 
   useEffect(() => {
     loadTickets(ticketsService);
@@ -30,7 +20,6 @@ const TicketListContainer = (props) => {
   }, []);
 
   useEffect(() => {
-    filter(activeFilters, tickets);
     setLoadingPercent(tickets.length / TICKETS_NUMBER_PER_PERCENT);
     if (!stop) {
       loadTickets(ticketsService);
@@ -43,7 +32,13 @@ const TicketListContainer = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tickets]);
 
-  const displayedTickets = sortTickets(filteredTicketList, activeSortingTab).slice(0, ticketsNumberToBeDisplayed);
+  const filteredTickets = useMemo(() => {
+    return filterTickets(activeFilters, tickets);
+  }, [tickets, activeFilters]);
+
+  const sortedTickets = useMemo(() => {
+    return sortTickets(filteredTickets, activeSortingTab);
+  }, [filteredTickets, activeSortingTab]);
 
   // данные загружаются и ни один из фильтров не выбран
   if (!isLoadingFinished && !activeFilters.length) {
@@ -60,22 +55,25 @@ const TicketListContainer = (props) => {
     return <Alert description="Рейсов, подходящих под заданные фильтры, не найдено" type="info" />;
   }
 
-  // данные загружаются и все фильтры выбраны
+  // данные загружены и все фильтры выбраны
   if (isLoadingFinished) {
-    return <TicketList tickets={displayedTickets} />;
+    return <TicketList tickets={sortedTickets.slice(0, displayedTicketsNumber)} />;
   }
 
-  // данные загружены и все фильтры выбраны
+  if (!tickets.length) {
+    return null;
+  }
+
+  // данные загружаются и все фильтры выбраны
   return (
     <>
       <Progress percent={loadingPercent} showInfo={false} strokeColor={{ from: '#108ee9', to: '#87d068' }} />
-      <TicketList tickets={displayedTickets} />
+      <TicketList tickets={sortedTickets.slice(0, displayedTicketsNumber)} />
     </>
   );
 };
 
 TicketListContainer.propTypes = {
-  filteredTicketList: PropTypes.arrayOf(PropTypes.object).isRequired,
   loadTickets: PropTypes.func.isRequired,
   ticketsService: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.array, PropTypes.object, PropTypes.string]))
     .isRequired,
@@ -83,8 +81,7 @@ TicketListContainer.propTypes = {
   tickets: PropTypes.arrayOf(PropTypes.object).isRequired,
   activeSortingTab: PropTypes.string.isRequired,
   activeFilters: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])).isRequired,
-  filter: PropTypes.func.isRequired,
-  ticketsNumberToBeDisplayed: PropTypes.number.isRequired,
+  displayedTicketsNumber: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = ({
@@ -92,18 +89,17 @@ const mapStateToProps = ({
   filteredTicketList,
   activeSortingTab,
   activeFilters,
-  ticketsNumberToBeDisplayed,
+  displayedTicketsNumber,
 }) => ({
   tickets,
   stop,
   filteredTicketList,
   activeSortingTab,
   activeFilters,
-  ticketsNumberToBeDisplayed,
+  displayedTicketsNumber,
 });
 const mapDispatchToProps = {
   loadTickets: loadTicketsThunk,
-  filter: filterTickets,
 };
 
 export default withTicketsService()(connect(mapStateToProps, mapDispatchToProps)(TicketListContainer));
