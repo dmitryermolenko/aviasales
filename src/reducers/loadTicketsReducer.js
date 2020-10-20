@@ -1,8 +1,9 @@
-import { FETCH_TICKETS_SUCCESS, FETCH_TICKETS_REQUEST } from '../actions/actions';
+import { FETCH_TICKETS_SUCCESS, FETCH_TICKETS_REQUEST, FETCH_TICKETS_FAILLURE } from '../actions/actions';
 
 const initialState = {
   tickets: [],
   stop: true,
+  error: false,
 };
 
 const loadTicketsReducer = (state = initialState, action) => {
@@ -14,6 +15,12 @@ const loadTicketsReducer = (state = initialState, action) => {
       };
     case FETCH_TICKETS_REQUEST:
       return initialState;
+    case FETCH_TICKETS_FAILLURE:
+      return {
+        tickets: [...state.tickets, ...action.tickets],
+        stop: action.stop,
+        error: action.error,
+      };
 
     default:
       return state;

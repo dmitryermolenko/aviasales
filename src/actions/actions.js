@@ -2,6 +2,7 @@ export const SET_ACTIVE_SORTING_TAB = 'SET_ACTIVE_SORTING_TAB';
 export const SET_ACTIVE_FILTER = 'SET_ACTIVE_FILTER';
 export const FETCH_TICKETS_SUCCESS = 'FETCH_TICKETS_SUCCESS';
 export const FETCH_TICKETS_REQUEST = 'FETCH_TICKETS_REQUEST';
+export const FETCH_TICKETS_FAILLURE = 'FETCH_TICKETS_FAILLURE';
 export const SET_TICKETS_NUMBER_TO_BE_DISPLAYED = 'SET_TICKETS_NUMBER_TO_BE_DISPLAYED';
 
 export const loadTickets = (newTickets, stop) => {
@@ -9,6 +10,15 @@ export const loadTickets = (newTickets, stop) => {
     type: FETCH_TICKETS_SUCCESS,
     tickets: newTickets,
     stop,
+  };
+};
+
+export const setError = (tickets, stop, error) => {
+  return {
+    type: FETCH_TICKETS_FAILLURE,
+    tickets,
+    stop,
+    error,
   };
 };
 
@@ -39,5 +49,7 @@ export const loadTicketsThunk = (service) => (dispatch) => {
     .then(({ tickets, stop }) => {
       dispatch(loadTickets(tickets, stop));
     })
-    .catch(() => dispatch(loadTickets([], false)));
+    .catch(() => {
+      dispatch(setError([], false, true));
+    });
 };

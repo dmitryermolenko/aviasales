@@ -8,12 +8,17 @@ export default class TicketsService extends React.Component {
   async getTickets() {
     if (!this.id) {
       const searchIdResponse = await fetch(`${this.baseUrl}/search`);
+      if (!searchIdResponse.ok) {
+        throw new Error(`Could not fetch https://front-test.beta.aviasales.ru/${this.baseUrl}/search`);
+      }
       const { searchId } = await searchIdResponse.json();
       this.id = searchId;
     }
 
     const ticketsResponse = await fetch(`${this.baseUrl}/tickets?searchId=${this.id}`);
-
+    if (!ticketsResponse.ok) {
+      throw new Error(`${this.baseUrl}/tickets?searchId=${this.id}`);
+    }
     return ticketsResponse.json();
   }
 }
