@@ -8,16 +8,13 @@ import classes from './TicketList.module.scss';
 
 const TicketList = ({ tickets }) => {
   const formattedData = tickets.map(formatData);
+  const ticketList = formattedData.map((ticket) => (
+    <li key={ticket.id} className={classes['ticket-list__item']}>
+      <Ticket ticket={ticket} />
+    </li>
+  ));
 
-  return (
-    <ul className={classes['ticket-list']}>
-      {formattedData.map((ticket) => (
-        <li key={ticket.id} className={classes['ticket-list__item']}>
-          <Ticket ticket={ticket} />
-        </li>
-      ))}
-    </ul>
-  );
+  return <ul className={classes['ticket-list']}>{ticketList}</ul>;
 };
 
 TicketList.defaultProps = {

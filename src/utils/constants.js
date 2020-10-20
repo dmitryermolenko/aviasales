@@ -19,5 +19,5 @@ export const FILTERS = [
   Filter.THREE_TRANSFERS,
 ];
 
-export const FILTERS_LENGTH = 5;
+export const FILTERS_LENGTH = Object.keys(Filter).length;
 export const DISPLAYED_TICKETS_DEFAULT_NUMBER = 5;
