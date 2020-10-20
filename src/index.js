@@ -8,7 +8,7 @@ import App from './compontents/App/App';
 import TicketsService from './services/TicketsService';
 import { TicketsServiceProvider } from './compontents/TicketsServiceContext/TicketsServiceContext';
 
-import store from './store';
+import store from './store/store';
 
 const ticketsService = new TicketsService();
 
