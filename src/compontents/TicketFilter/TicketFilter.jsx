@@ -12,7 +12,7 @@ const TicketFilter = ({ activeFilters, setFilter }) => {
         value={id}
         type="checkbox"
         checked={checkActiveFilter(activeFilters, id)}
-        onChange={() => setFilter(id)}
+        onChange={() => setFilter({ filterId: id })}
       />
       <label className={classes.filter__label} htmlFor={id}>
         {text}

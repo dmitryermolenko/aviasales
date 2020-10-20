@@ -5,41 +5,38 @@ export const FETCH_TICKETS_REQUEST = 'FETCH_TICKETS_REQUEST';
 export const FETCH_TICKETS_FAILLURE = 'FETCH_TICKETS_FAILLURE';
 export const SET_TICKETS_NUMBER_TO_BE_DISPLAYED = 'SET_TICKETS_NUMBER_TO_BE_DISPLAYED';
 
-export const loadTickets = (newTickets, stop) => {
+export const loadTickets = (payload) => {
   return {
     type: FETCH_TICKETS_SUCCESS,
-    tickets: newTickets,
-    stop,
+    payload,
   };
 };
 
-export const setError = (tickets, stop, error) => {
+export const setError = (payload) => {
   return {
     type: FETCH_TICKETS_FAILLURE,
-    tickets,
-    stop,
-    error,
+    payload,
   };
 };
 
-export const setActiveSortingTab = (tabId) => {
+export const setActiveSortingTab = (payload) => {
   return {
     type: SET_ACTIVE_SORTING_TAB,
-    tabId,
+    payload,
   };
 };
 
-export const setActiveFilter = (filterId) => {
+export const setActiveFilter = (payload) => {
   return {
     type: SET_ACTIVE_FILTER,
-    filterId,
+    payload,
   };
 };
 
-export const setDisplayedTicketsNumber = (ticketsNumber) => {
+export const setDisplayedTicketsNumber = (payload) => {
   return {
     type: SET_TICKETS_NUMBER_TO_BE_DISPLAYED,
-    ticketsNumber,
+    payload,
   };
 };
 
@@ -47,9 +44,9 @@ export const loadTicketsThunk = (service) => (dispatch) => {
   service
     .getTickets()
     .then(({ tickets, stop }) => {
-      dispatch(loadTickets(tickets, stop));
+      dispatch(loadTickets({ tickets, stop }));
     })
     .catch(() => {
-      dispatch(setError([], false, true));
+      dispatch(setError({ tickets: [], stop: false, error: true }));
     });
 };

@@ -7,13 +7,14 @@ import { setDisplayedTicketsNumber } from '../../actions/actions';
 import { DISPLAYED_TICKETS_DEFAULT_NUMBER } from '../../utils/constants';
 
 const ShowmoreButtonContainer = ({ displayedTicketsNumber, setTicketsNumber, tickets, activeFilters }) => {
+  const displayedTicketsTotal = displayedTicketsNumber + DISPLAYED_TICKETS_DEFAULT_NUMBER;
   if (tickets.length && activeFilters.length) {
     return (
       <Button
         className={classes['show-more']}
         type="primary"
         block
-        onClick={() => setTicketsNumber(displayedTicketsNumber + DISPLAYED_TICKETS_DEFAULT_NUMBER)}
+        onClick={() => setTicketsNumber({ ticketsNumber: displayedTicketsTotal })}
       >
         Показать еще 5 билетов
       </Button>

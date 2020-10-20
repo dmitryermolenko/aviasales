@@ -21,11 +21,11 @@ const SortingButton = (props) => {
 
   const buttonClickHandler = () => {
     if (id === activeSortingTab) {
-      setTicketsNumber(displayedTicketsNumber);
+      setTicketsNumber({ ticketsNumber: displayedTicketsNumber });
     } else {
-      setTicketsNumber(DISPLAYED_TICKETS_DEFAULT_NUMBER);
+      setTicketsNumber({ ticketsNumber: DISPLAYED_TICKETS_DEFAULT_NUMBER });
     }
-    setActiveTab(id);
+    setActiveTab({ tabId: id });
   };
 
   return (

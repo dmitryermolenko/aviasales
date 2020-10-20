@@ -5,7 +5,8 @@ const { ALL } = constants.Filter;
 const { FILTERS_LENGTH, FILTERS } = constants;
 const initialState = FILTERS;
 
-const filterTicketsReducer = (state = initialState, { type, filterId }) => {
+const filterTicketsReducer = (state = initialState, { type, payload = {} }) => {
+  const { filterId } = payload;
   switch (type) {
     case SET_ACTIVE_FILTER:
       // Если при включенной галочке "Все"

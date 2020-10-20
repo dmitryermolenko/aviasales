@@ -6,20 +6,21 @@ const initialState = {
   error: false,
 };
 
-const loadTicketsReducer = (state = initialState, action) => {
-  switch (action.type) {
+const loadTicketsReducer = (state = initialState, { type, payload = {} }) => {
+  const { tickets, stop, error } = payload;
+  switch (type) {
     case FETCH_TICKETS_SUCCESS:
       return {
-        tickets: [...state.tickets, ...action.tickets],
-        stop: action.stop,
+        tickets: [...state.tickets, ...tickets],
+        stop,
       };
     case FETCH_TICKETS_REQUEST:
       return initialState;
     case FETCH_TICKETS_FAILLURE:
       return {
-        tickets: [...state.tickets, ...action.tickets],
-        stop: action.stop,
-        error: action.error,
+        tickets: [...state.tickets, ...tickets, error],
+        stop,
+        error,
       };
 
     default:
